@@ -2,6 +2,12 @@
 name = "rs-max"
 version = "0.1.0"
 edition = "2024"
+description = "Maximum strictness Rust project"
+license = "MIT"
+repository = "https://github.com/user/rs-max"
+readme = "README.md"
+keywords = ["template"]
+categories = ["development-tools"]
 
 [dependencies]
 
