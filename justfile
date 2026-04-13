@@ -13,7 +13,16 @@ setup: install
     @echo "done"
 
 # Full pipeline
-ci: clean update fmt-check typos no-comments lint test deny machete doc
+ci: clean update check-all
+
+# CI pipeline (no clean needed on fresh checkout)
+ci-remote: update check-all-ci
+
+# All checks
+check-all: fmt-check typos no-comments lint test deny machete doc
+
+# All checks with CI test profile
+check-all-ci: fmt-check typos no-comments lint test-ci deny machete doc
 
 # Quick check (faster than full lint)
 check:
@@ -37,20 +46,17 @@ no-comments:
 typos:
     typos
 
-# Fix typos automatically
-typos-fix:
+# Fix everything automatically
+fix:
+    cargo clippy --all-targets --all-features --fix --allow-dirty -- -D warnings
+    rg -l '^\s*//[^/!]' -t rust src/ | xargs perl -ni -e 'print unless /^\s*\/\/[^\/!]/' 2>/dev/null || true
     typos -w
+    cargo fmt --all
+    dprint fmt
 
 # Clippy with all lints
 lint:
     cargo clippy --all-targets --all-features --quiet -- -D warnings
-
-# Clippy auto-fix
-fix:
-    cargo clippy --all-targets --all-features --fix --allow-dirty -- -D warnings
-    rg -l '^\s*//[^/!]' -t rust src/ | xargs perl -ni -e 'print unless /^\s*\/\/[^\/!]/' 2>/dev/null || true
-    cargo fmt --all
-    dprint fmt
 
 # Run tests
 test:
