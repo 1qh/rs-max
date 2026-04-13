@@ -52,11 +52,10 @@ variant_size_differences = "forbid"
 
 [lints.clippy]
 # Everything on, max severity
-all = { level = "deny", priority = -1 }
-pedantic = { level = "deny", priority = -1 }
-nursery = { level = "deny", priority = -1 }
-cargo = { level = "deny", priority = -1 }
-restriction = { level = "deny", priority = -1 }
+pedantic = { level = "forbid", priority = -1 }
+nursery = { level = "forbid", priority = -1 }
+cargo = { level = "forbid", priority = -1 }
+restriction = { level = "forbid", priority = -1 }
 
 # Conflicts and false positives — allow only what's unavoidable
 module_name_repetitions = "allow"
