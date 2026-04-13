@@ -52,27 +52,19 @@ variant_size_differences = "forbid"
 
 [lints.clippy]
 # Everything on, max severity
-pedantic = { level = "forbid", priority = -1 }
-nursery = { level = "forbid", priority = -1 }
-cargo = { level = "forbid", priority = -1 }
-restriction = { level = "forbid", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+nursery = { level = "deny", priority = -1 }
+cargo = { level = "deny", priority = -1 }
+restriction = { level = "deny", priority = -1 }
 
-# Conflicts and false positives — allow only what's unavoidable
-module_name_repetitions = "allow"
-must_use_candidate = "allow"
-missing_errors_doc = "allow"
-missing_panics_doc = "allow"
-missing_const_for_fn = "allow"
+# Contradicting lint pairs — pick one side, forbid it, allow the other
+separated_literal_suffix = "allow"        # keep unseparated_literal_suffix
+pub_with_shorthand = "allow"              # keep pub_without_shorthand
+self_named_module_files = "allow"         # keep mod_module_files
+exhaustive_enums = "allow"                # keep non_exhaustive_omitted_patterns
+exhaustive_structs = "allow"              # keep non_exhaustive_omitted_patterns
+ref_patterns = "allow"                    # keep pattern_type_mismatch
 blanket_clippy_restriction_lints = "allow" # meta-lint about enabling restriction group
-implicit_return = "allow"                  # conflicts with Rust convention
-question_mark_used = "allow"              # conflicts with idiomatic ? operator
-separated_literal_suffix = "allow"        # conflicts with unseparated_literal_suffix
-ref_patterns = "allow"                    # conflicts with pattern_type_mismatch
-pub_with_shorthand = "allow"              # conflicts with pub_without_shorthand
-single_call_fn = "allow"                  # too noisy, flags valid abstractions
-exhaustive_enums = "allow"                # conflicts with non_exhaustive_omitted_patterns
-exhaustive_structs = "allow"              # same reason
-self_named_module_files = "allow"         # conflicts with mod_module_files
 
 [profile.release]
 lto = "fat"
