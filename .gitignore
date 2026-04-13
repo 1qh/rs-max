@@ -1,4 +1,6 @@
 /target
 Cargo.lock
 lcov.info
-rust_out
+.editorconfig
+rust-analyzer.toml
+.githooks
