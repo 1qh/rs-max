@@ -2,13 +2,21 @@ set shell := ["bash", "-uc"]
 
 default: ci
 
-ci: fmt-check lint test deny machete doc
+ci: fmt-check toml-check typos lint test deny machete doc
 
 fmt:
     cargo fmt --all
+    taplo fmt
 
 fmt-check:
     cargo fmt --all -- --check
+    taplo check
+
+toml-check:
+    taplo lint
+
+typos:
+    typos
 
 lint:
     cargo clippy --all-targets --all-features -- -D warnings
