@@ -14,10 +14,8 @@ serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.149"
 
 [lints.rust]
-# Promote all warnings to errors
 warnings = "deny"
 
-# Every allow-by-default rustc lint — forbid
 unsafe_code = "forbid"
 absolute_paths_not_starting_with_crate = "forbid"
 ambiguous_negative_literals = "forbid"
@@ -69,26 +67,24 @@ unused_extern_crates = "deny"
 unused_import_braces = "forbid"
 unused_lifetimes = "forbid"
 unused_macro_rules = "forbid"
-unused_qualifications = "deny" # serde derive emits #[allow(unused_qualifications)]
+unused_qualifications = "deny"
 unused_results = "forbid"
 variant_size_differences = "forbid"
 
 [lints.clippy]
-# Everything on, max severity
 pedantic = { level = "deny", priority = -1 }
 nursery = { level = "deny", priority = -1 }
 cargo = { level = "deny", priority = -1 }
 restriction = { level = "deny", priority = -1 }
 
-# Contradicting lint pairs — pick one side, forbid it, allow the other
-separated_literal_suffix = "allow"        # keep unseparated_literal_suffix
-pub_with_shorthand = "allow"              # keep pub_without_shorthand
-self_named_module_files = "allow"         # keep mod_module_files
-exhaustive_enums = "allow"                # keep non_exhaustive_omitted_patterns
-exhaustive_structs = "allow"              # keep non_exhaustive_omitted_patterns
-ref_patterns = "allow"                    # keep pattern_type_mismatch
-blanket_clippy_restriction_lints = "allow" # meta-lint about enabling restriction group
-needless_return = "allow"                  # conflicts with implicit_return (restriction)
+separated_literal_suffix = "allow"
+pub_with_shorthand = "allow"
+self_named_module_files = "allow"
+exhaustive_enums = "allow"
+exhaustive_structs = "allow"
+ref_patterns = "allow"
+blanket_clippy_restriction_lints = "allow"
+needless_return = "allow"
 
 [profile.release]
 lto = "fat"

@@ -52,6 +52,7 @@ lint:
 # Clippy auto-fix
 fix:
     cargo clippy --all-targets --all-features --fix --allow-dirty -- -D warnings
+    sed -i '' '/^[[:space:]]*\/\/[^\/!]/d' src/**/*.rs
     cargo fmt --all
     taplo fmt
 
