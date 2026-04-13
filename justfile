@@ -30,7 +30,7 @@ fmt-check:
 
 # Ban comments in Rust source (doc comments allowed)
 no-comments:
-    ! grep -rn '^\s*//[^/!]' --include='*.rs' src/
+    ! rg '^\s*//[^/!]' -t rust src/
 
 # Lint TOML files
 toml-check:
