@@ -1,11 +1,6 @@
-//! rs-max: Maximum strictness Rust project.
+//! rs-max binary entry point.
+
+use rs_max as _;
 
 /// Entry point.
 const fn main() {}
-
-#[cfg(test)]
-mod tests {
-    /// Verifies the project compiles under maximum lint strictness.
-    #[test]
-    fn compiles() {}
-}

@@ -13,7 +13,7 @@ categories = ["development-tools"]
 
 [lints.rust]
 # Promote all warnings to errors
-warnings = "deny"
+warnings = "forbid"
 
 # Every allow-by-default rustc lint — forbid
 unsafe_code = "forbid"

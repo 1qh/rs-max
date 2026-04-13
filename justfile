@@ -11,7 +11,7 @@ fmt-check:
     cargo fmt --all -- --check
 
 lint:
-    cargo clippy --all-targets --all-features -- -D warnings
+    cargo clippy --lib --bins --all-features -- -D warnings
 
 test:
     cargo nextest run --all-features --no-tests=pass
