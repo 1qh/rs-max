@@ -2,8 +2,12 @@ set shell := ["bash", "-uc"]
 
 default: ci
 
+# Install all required tools
+install:
+    brew install just cargo-nextest cargo-deny cargo-machete cargo-llvm-cov taplo typos-cli bacon
+
 # First-time setup after clone
-setup:
+setup: install
     git config core.hooksPath .githooks
     @echo "done"
 
@@ -43,10 +47,17 @@ lint:
 # Clippy auto-fix
 fix:
     cargo clippy --all-targets --all-features --fix --allow-dirty -- -D warnings
+    cargo fmt --all
+    taplo fmt
 
 # Run tests
 test:
     cargo nextest run --all-features --no-tests=pass
+    cargo test --doc 2>/dev/null || true
+
+# Run tests with CI profile (retries, no fail-fast)
+test-ci:
+    cargo nextest run --all-features --no-tests=pass --profile ci
     cargo test --doc 2>/dev/null || true
 
 # Dependency audit
@@ -89,3 +100,15 @@ release:
 # Clean build artifacts
 clean:
     cargo clean
+
+# Show outdated dependencies
+outdated:
+    cargo install cargo-outdated 2>/dev/null; cargo outdated -R
+
+# Expand macros for a file (e.g. just expand src/main.rs)
+expand file:
+    cargo expand --file {{file}}
+
+# Show binary size breakdown
+bloat:
+    cargo install cargo-bloat 2>/dev/null; cargo bloat --release
