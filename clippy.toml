@@ -1,13 +1,16 @@
-cognitive-complexity-threshold = 10
-too-many-arguments-threshold = 5
-too-many-lines-threshold = 60
-type-complexity-threshold = 200
-excessive-nesting-threshold = 4
-max-fn-params-bools = 1
-max-struct-bools = 2
-enum-variant-size-threshold = 128
-large-error-threshold = 64
-future-size-threshold = 4096
+cognitive-complexity-threshold = 5
+too-many-arguments-threshold = 4
+too-many-lines-threshold = 40
+type-complexity-threshold = 150
+excessive-nesting-threshold = 3
+max-fn-params-bools = 0
+max-struct-bools = 1
+enum-variant-size-threshold = 64
+large-error-threshold = 32
+future-size-threshold = 2048
+stack-size-threshold = 262144
+single-char-binding-names-threshold = 0
+trivial-copy-size-limit = 8
 
 allow-unwrap-in-tests = false
 allow-expect-in-tests = false
