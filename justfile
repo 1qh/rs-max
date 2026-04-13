@@ -48,7 +48,7 @@ lint:
 # Clippy auto-fix
 fix:
     cargo clippy --all-targets --all-features --fix --allow-dirty -- -D warnings
-    sed -i '' '/^[[:space:]]*\/\/[^\/!]/d' src/**/*.rs
+    rg -l '^\s*//[^/!]' -t rust src/ | xargs perl -ni -e 'print unless /^\s*\/\/[^\/!]/' 2>/dev/null || true
     cargo fmt --all
     dprint fmt
 
@@ -90,7 +90,6 @@ cov-ci:
 update:
     cargo update
     dprint config update || true
-    git add Cargo.lock dprint.json 2>/dev/null || true
 
 # Dev loop
 watch:
