@@ -12,7 +12,7 @@ setup: install
     @echo "done"
 
 # Full pipeline — pre-commit hook and CI run this
-ci: fmt-check toml-check typos lint test deny machete doc
+ci: fmt-check toml-check typos no-comments lint test deny machete doc
 
 # Quick check (faster than full lint)
 check:
@@ -27,6 +27,10 @@ fmt:
 fmt-check:
     cargo fmt --all -- --check
     taplo check
+
+# Ban comments in Rust source (doc comments allowed)
+no-comments:
+    ! grep -rn '^\s*//[^/!]' --include='*.rs' src/
 
 # Lint TOML files
 toml-check:
