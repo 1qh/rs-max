@@ -13,7 +13,7 @@ setup: install
     @echo "done"
 
 # Full pipeline
-ci: fmt-check typos no-comments lint test deny machete doc
+ci: clean update fmt-check typos no-comments lint test deny machete doc
 
 # Quick check (faster than full lint)
 check:
@@ -89,8 +89,8 @@ cov-ci:
 # Update all dependencies
 update:
     cargo update
-    dprint config update
-    cargo deny -L error check
+    dprint config update || true
+    git add Cargo.lock dprint.json 2>/dev/null || true
 
 # Dev loop
 watch:
