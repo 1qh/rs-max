@@ -10,6 +10,10 @@ setup:
 # Full pipeline — pre-commit hook and CI run this
 ci: fmt-check toml-check typos lint test deny machete doc
 
+# Quick check (faster than full lint)
+check:
+    cargo check --all-targets --all-features
+
 # Format everything
 fmt:
     cargo fmt --all
@@ -28,9 +32,17 @@ toml-check:
 typos:
     typos
 
+# Fix typos automatically
+typos-fix:
+    typos -w
+
 # Clippy with all lints
 lint:
     cargo clippy --all-targets --all-features -- -D warnings
+
+# Clippy auto-fix
+fix:
+    cargo clippy --all-targets --all-features --fix --allow-dirty -- -D warnings
 
 # Run tests
 test:
@@ -49,13 +61,22 @@ machete:
 doc:
     RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --all-features
 
-# Test coverage report
+# Open docs in browser
+doc-open:
+    RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --all-features --open
+
+# Test coverage report (opens browser)
 cov:
     cargo llvm-cov --all-features --open
 
 # Test coverage (CI, lcov output)
 cov-ci:
     cargo llvm-cov --all-features --lcov --output-path lcov.info
+
+# Update all dependencies
+update:
+    cargo update
+    cargo deny check
 
 # Dev loop — rerun on file changes
 watch:
@@ -64,3 +85,7 @@ watch:
 # Build release
 release:
     cargo build --release
+
+# Clean build artifacts
+clean:
+    cargo clean
