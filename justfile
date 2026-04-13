@@ -5,10 +5,10 @@ default: ci
 ci: fmt-check lint test deny machete doc
 
 fmt:
-    cargo +nightly fmt --all
+    cargo fmt --all
 
 fmt-check:
-    cargo +nightly fmt --all -- --check
+    cargo fmt --all -- --check
 
 lint:
     cargo clippy --all-targets --all-features -- -D warnings
