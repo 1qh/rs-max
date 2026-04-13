@@ -16,14 +16,15 @@ allow = [
     "Unicode-DFS-2016",
     "Zlib",
 ]
-confidence-threshold = 0.8
+confidence-threshold = 0.93
 
 [licenses.private]
-ignore = true
+ignore = false
 
 [bans]
 multiple-versions = "deny"
 wildcards = "deny"
+highlight = "all"
 
 [sources]
 unknown-registry = "deny"
