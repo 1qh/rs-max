@@ -1,4 +1,5 @@
 set shell := ["bash", "-uc"]
+set quiet
 
 default: ci
 
@@ -26,7 +27,7 @@ fmt:
 # Check formatting
 fmt-check:
     cargo fmt --all -- --check
-    taplo check
+    RUST_LOG=error taplo check
 
 # Ban comments in Rust source (doc comments allowed)
 no-comments:
@@ -34,7 +35,7 @@ no-comments:
 
 # Lint TOML files
 toml-check:
-    taplo lint
+    RUST_LOG=error taplo lint
 
 # Spell check
 typos:
@@ -46,7 +47,7 @@ typos-fix:
 
 # Clippy with all lints
 lint:
-    cargo clippy --all-targets --all-features -- -D warnings
+    cargo clippy --all-targets --all-features --quiet -- -D warnings
 
 # Clippy auto-fix
 fix:
@@ -56,25 +57,25 @@ fix:
 
 # Run tests
 test:
-    cargo nextest run --all-features --no-tests=pass
-    cargo test --doc 2>/dev/null || true
+    cargo nextest run --all-features --no-tests=pass --status-level=none --final-status-level=fail 2>/dev/null
+    cargo test --doc --quiet 2>&1 | rg '^(FAIL|error)' || true
 
 # Run tests with CI profile (retries, no fail-fast)
 test-ci:
-    cargo nextest run --all-features --no-tests=pass --profile ci
-    cargo test --doc 2>/dev/null || true
+    cargo nextest run --all-features --no-tests=pass --profile ci --status-level=fail
+    cargo test --doc --quiet 2>/dev/null || true
 
 # Dependency audit
 deny:
-    cargo deny check
+    cargo deny -L error check
 
 # Unused dependency check
 machete:
-    cargo machete
+    cargo machete 2>&1 | rg -v '^(Analyzing|Done!|cargo-machete)' || true
 
 # Build docs, deny warnings
 doc:
-    RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --all-features
+    RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --all-features --quiet
 
 # Open docs in browser
 doc-open:
@@ -91,7 +92,7 @@ cov-ci:
 # Update all dependencies
 update:
     cargo update
-    cargo deny check
+    cargo deny -L error check
 
 # Dev loop — rerun on file changes
 watch:
