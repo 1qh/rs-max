@@ -1,5 +1,0 @@
-[build]
-rustdocflags = ["-D", "warnings"]
-
-[alias]
-xtask = "run --package xtask --"

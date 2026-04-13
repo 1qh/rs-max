@@ -1,2 +1,2 @@
 #!/bin/sh
-just ci
+cargo lintmax
