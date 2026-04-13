@@ -5,15 +5,15 @@ default: ci
 
 # Install all required tools
 install:
-    brew install just cargo-nextest cargo-deny cargo-machete cargo-llvm-cov taplo typos-cli bacon
+    brew install just cargo-nextest cargo-deny cargo-machete cargo-llvm-cov dprint typos-cli bacon ripgrep
 
 # First-time setup after clone
 setup: install
     git config core.hooksPath .githooks
     @echo "done"
 
-# Full pipeline — pre-commit hook and CI run this
-ci: fmt-check toml-check typos no-comments lint test deny machete doc
+# Full pipeline
+ci: fmt-check typos no-comments lint test deny machete doc
 
 # Quick check (faster than full lint)
 check:
@@ -22,20 +22,16 @@ check:
 # Format everything
 fmt:
     cargo fmt --all
-    taplo fmt
+    dprint fmt
 
 # Check formatting
 fmt-check:
     cargo fmt --all -- --check
-    RUST_LOG=error taplo check
+    dprint check
 
 # Ban comments in Rust source (doc comments allowed)
 no-comments:
     ! rg '^\s*//[^/!]' -t rust src/
-
-# Lint TOML files
-toml-check:
-    RUST_LOG=error taplo lint
 
 # Spell check
 typos:
@@ -54,7 +50,7 @@ fix:
     cargo clippy --all-targets --all-features --fix --allow-dirty -- -D warnings
     sed -i '' '/^[[:space:]]*\/\/[^\/!]/d' src/**/*.rs
     cargo fmt --all
-    taplo fmt
+    dprint fmt
 
 # Run tests
 test:
@@ -93,9 +89,10 @@ cov-ci:
 # Update all dependencies
 update:
     cargo update
+    dprint config update
     cargo deny -L error check
 
-# Dev loop — rerun on file changes
+# Dev loop
 watch:
     bacon clippy
 

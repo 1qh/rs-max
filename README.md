@@ -10,18 +10,18 @@ just setup
 
 ## Commands
 
-| Command | What |
-|---------|------|
-| `just ci` | Full pipeline (format, lint, test, audit, docs) |
-| `just check` | Quick cargo check |
-| `just fmt` | Auto-format rust + toml |
-| `just fix` | Auto-fix clippy lints |
-| `just lint` | Clippy with all lints |
-| `just test` | Run tests |
-| `just watch` | Dev loop with bacon |
-| `just cov` | Coverage report |
-| `just update` | Update all dependencies |
-| `just doc-open` | Build and open docs |
+| Command         | What                                            |
+| --------------- | ----------------------------------------------- |
+| `just ci`       | Full pipeline (format, lint, test, audit, docs) |
+| `just check`    | Quick cargo check                               |
+| `just fmt`      | Auto-format rust + toml                         |
+| `just fix`      | Auto-fix clippy lints                           |
+| `just lint`     | Clippy with all lints                           |
+| `just test`     | Run tests                                       |
+| `just watch`    | Dev loop with bacon                             |
+| `just cov`      | Coverage report                                 |
+| `just update`   | Update all dependencies                         |
+| `just doc-open` | Build and open docs                             |
 
 ## Strictness
 

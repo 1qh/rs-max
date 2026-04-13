@@ -1,13 +1,13 @@
 [package]
 name = "rs-max"
 version = "0.1.0"
-edition = "2024"
-description = "Maximum strictness Rust project"
-license = "MIT"
-repository = "https://github.com/1qh/rs-max"
-readme = "README.md"
-keywords = ["template"]
 categories = ["development-tools"]
+edition = "2024"
+keywords = ["template"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/1qh/rs-max"
+description = "Maximum strictness Rust project"
 
 [dependencies]
 serde = { version = "1.0.228", features = ["derive"] }

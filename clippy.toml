@@ -27,4 +27,19 @@ accept-comment-above-attributes = true
 accept-comment-above-statement = true
 missing-docs-in-crate-items = true
 
-doc-valid-idents = ["GraphQL", "GitHub", "JavaScript", "TypeScript", "WebSocket", "MongoDB", "PostgreSQL", "MySQL", "SQLite", "Redis", "OAuth", "OpenAPI", "gRPC", "WebAssembly"]
+doc-valid-idents = [
+  "GraphQL",
+  "GitHub",
+  "JavaScript",
+  "TypeScript",
+  "WebSocket",
+  "MongoDB",
+  "PostgreSQL",
+  "MySQL",
+  "SQLite",
+  "Redis",
+  "OAuth",
+  "OpenAPI",
+  "gRPC",
+  "WebAssembly",
+]
