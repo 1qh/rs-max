@@ -17,7 +17,7 @@ jobs:
       - uses: taiki-e/install-action@v2
         with:
           tool: just,cargo-nextest,cargo-deny,cargo-machete,cargo-llvm-cov,dprint,typos-cli,ripgrep
-      - run: just fmt-check typos no-comments lint test-ci deny machete doc
+      - run: just update fmt-check typos no-comments lint test-ci deny machete doc
       - run: just cov-ci
       - uses: actions/upload-artifact@v7
         with:
